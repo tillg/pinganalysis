@@ -1,0 +1,79 @@
+
+body {
+/*	background-color:#F8F8F0; */
+	background-color:#000; 
+	font-family:Verdana, Arial, Helvetica, sans-serif; 
+	font-size:10pt; 
+	color:#00E000; }
+
+
+#center {
+	width:1000px; 
+/*	height:90%; */
+	text-align:left; 
+	margin:auto auto;
+	text-decoration: none;
+	background-color: #000800;
+	border-radius: 15px;
+	}
+
+h1 { font-size:130%;}
+h2 { font-size:120%;}
+h3 { font-size:110%;}
+
+a { color:#00C000; text-decoration:underline;}
+a:link { color:#00C000; } 
+a:visited { color:#008000; }
+a:active { color:#FF0000; }
+a:hover { color:#FF0000; text-decoration:none; }
+
+img
+{
+/*	vertical-align:text-top; */
+}
+
+table { 
+	font-size:90%; 
+	}
+
+table.chart { 
+	border-collapse: collapse;
+	background-color: #000F00;
+	border-radius: 15px;
+	margin: 5px;
+	}
+
+td.chart { 
+	border: 0; 
+	padding: 0;
+	margin: 0;
+	border: none;
+	border-width:0;
+	text-align:center;
+	vertical-align:text-top;
+	}
+
+td.chartAverage { 
+	border: 0; 
+	padding: 0;
+	margin: 0;
+	border: none;
+	border-width:0;
+	text-align:center;
+/*	vertical-align:bottom; */
+	height: 60px;
+	}
+
+td.statistic {
+	text-align:center;
+	}
+
+button {
+	background-color: #00C000;
+	border: 1px #080 solid;
+	font-size:90%; 
+}
+
+.smallText {
+	font-size:90%;
+}

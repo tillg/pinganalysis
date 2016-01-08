@@ -1,0 +1,253 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<meta name="author" content="Standard"/>
+<meta name="description" content="Ping Analysis" />
+<meta name="keywords" content=""/>
+<meta name="date" content="2012-09-30T21:01:12+0100"/>
+<meta name="robots" content="index, follow" />
+<meta name="language" content="de" />
+<meta name="Content-Language" content="de" />
+
+
+<title>Ping Analysis</title>
+<script type="text/javascript" src="system/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" src="system/configuration.js"></script>
+<script type="text/javascript" src="system/functions.js"></script>
+
+<link rel="stylesheet" type="text/css" href="system/default.css">
+
+</head>
+<body>
+
+<div id="center">
+
+	<h1>Ping Analysis</h1>
+
+	<p id="warning" style="color:red;">
+	</p>
+
+	<h2><a href="#" onclick="fnToggleDiv('configTable');">Configuration</a></h2>
+
+	<table id="configTable">
+		<tr>
+			<th> 	<a href="system/configuration.js" target="_blank">Configuration</a>
+			</th>
+			<th> &nbsp; </th>
+			<th> </th>
+			<th> &nbsp; </th>
+			<th> Current </th>
+			<th> &nbsp; </th>
+			<th> </th>
+		</tr>
+		<tr>
+			<td> Interval between pings: </td>
+			<td> </td>
+			<td id="infoInterval1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoInterval2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoInterval3" style="text-align:left;"> </td>
+			<td> 
+				<button onclick="alert('Interval between ping requests as in the ping command. Windows ping default is 1 second. Unix-systems can define an interval, e.g. 5 seconds.')">[?]</button>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"> Multiplier for auto-refresh: </td>
+			<td> </td>
+			<td id="infoRefresh1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoRefresh2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoRefresh3" style="text-align:left;"> </td>
+			<td style="vertical-align:top;"> 
+				<button onclick="alert('Turn automatic refresh on or off. Refresh rate is defined by the ping interval to multiplier, eg. 5 seconds interval x 2 = refresh every 10 seconds. \nDo not use too small multipliers with short intervals and a high number of entries because it can slow down your computer. (e.g. 1 sec interval x 1 at 5000 entries) \nIf you screwed up, you can use the *Fail Safe* link at the end of this page.')">[?]</button>
+			</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:top;"> Number of entries in chart: </td>
+			<td> </td>
+			<td id="infoResults1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoResults2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoResults3" style="text-align:left;"> </td>
+			<td style="vertical-align:top;"> 
+				<button onclick="alert('Number of entries from logfile to show in the chart. Counting starts with the latest entries.')">[?]</button>
+			</td>
+		</tr>		
+		<tr>
+			<td> Width of bars: </td>
+			<td> </td>
+			<td id="infoBarWidth1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoBarWidth2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoBarWidth3" style="text-align:left;"> </td>
+			<td> 
+				<button onclick="alert('Change the width of bars in the chart in pixels.')">[?]</button>
+			</td>
+		</tr>
+		<tr>
+			<td> Height of bars: </td>
+			<td> </td>
+			<td id="infoBarHeight1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoBarHeight2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoBarHeight3" style="text-align:left;"> </td>
+			<td> 
+				<button onclick="alert('Change the height of bars in chart in percent. (At 100%: 10ms equals 10pixels height.)')">[?]</button>
+			</td>
+		</tr>
+		<tr>
+			<td> Operating system of logfile: </td>
+			<td> </td>
+			<td id="infoSystem1" style="text-align:right;"> </td>
+			<td> &lt;- </td>
+			<td id="infoSystem2" style="text-align:center;"> </td>
+			<td> -&gt; </td>
+			<td id="infoSystem3" style="text-align:left;"> </td>
+			<td> 
+				<button onclick="alert('Windows and Linux/Unix/Mac have different ping reports. Change it to your operating system.')">[?]</button>
+			</td>
+		</tr>
+	</table>
+
+	<h2>Statistics</h2>
+
+	<table class="statistics">
+		<tr>
+			<th> </th>
+			<th>Minimum</th>
+			<th> </th>
+			<th>Maximum</th>
+			<th> </th>
+			<th>Average</th>
+			<th> </th>
+			<th>passed</th>
+			<th> </th>
+		</tr>
+		<tr>
+			<td style="text-align:left;">Current view</td>
+			<td id="statsCurrent1" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsCurrent2" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsCurrent3" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsCurrent4" class="statistic"> </td>
+			<td> sec = </td>
+			<td id="statsCurrent5" class="statistic"> </td>
+			<td> min = </td>
+			<td id="statsCurrent6" class="statistic"> </td>
+			<td> hrs </td>
+		</tr>
+		<tr>
+			<td style="text-align:left;">All entries</td>
+			<td id="statsTotal1" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsTotal2" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsTotal3" class="statistic"> </td>
+			<td> ms </td>
+			<td id="statsTotal4" class="statistic"> </td>
+			<td> sec = </td>
+			<td id="statsTotal5" class="statistic"> </td>
+			<td> min = </td>
+			<td id="statsTotal6" class="statistic"> </td>
+			<td> hrs </td>
+		</tr>
+	</table>
+
+	<p id="information">
+	</p>
+
+
+
+	<h2>Chart</h2>
+
+<!-- style="width:100%; text-align:center;" -->
+		<div class="smallText" id="lastReloadDiv" style="margin:auto;">
+			Last Reload: 
+			<span id="lastReloadDifference"> </span> on
+			<span id="lastReloadTime"> </span>
+			<span id="trendGeneral"> </span>
+			<span id="trendShort"> </span>
+			<span id="trendMedium"> </span>
+			<span id="trendLong"> </span>
+		</div>
+
+		<table id="chartPositionAverage" style="margin:auto;">
+			<tr>
+			<td style="width:50%" id="chartPositionAverageStart" class="smallText">
+			</td>
+			<td id="chartPositionAverageMiddle" class="smallText"></td>
+			</tr>
+		</table>
+
+
+		<table class="chart" style="margin:auto;">
+			<tr id="chartAverage">
+			</tr>
+			<tr id="chart">
+			</tr>
+		</table>
+
+		<table id="chartPositionPings" style="margin:auto;">
+			<tr>
+			<td style="width:50%" id="chartPositionPingsStart" class="smallText">
+			</td>
+			<td id="chartPositionPingsMiddle" class="smallText"></td>
+			</tr>
+		</table>
+
+	<h2>Files</h2>
+
+	<table>
+		<tr>
+			<td>Change file:</td>
+			<td id="changeFile"></td>
+		</tr>
+		<tr>
+			<td>More files:</td>
+			<td id="moreFiles"></td>
+		</tr>		<tr>
+			<td>Reload: </td>
+			<td id="reloadFile"></td>
+		</tr>
+		<tr>
+			<td>Reload: </td>
+			<td><a href="index.html">Today's file with default values</a>. (Fail Safe Mode)</td>
+		</tr>
+	</table>
+
+
+	<div id="debug">
+	</div>
+
+	<br />
+
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+
+	// no parameters given -> forward to page with default values from configuration file
+	if (window.location.search == "")
+	{
+		strFilename = "";
+		window.location.href = "index.html?strSystem="+strSystem+"&strFilename="+strFilename+"&intInterval="+intInterval+"&intNumberResults="+intNumberResults+"&intBarWidth="+intBarWidth+"&intBarHeight="+intBarHeight+"&intFileSearch="+intFileSearch+"&intRefreshRate="+intRefreshRate+"&";
+	}
+	else
+	{
+		fnStart();
+		fnToggleDiv('configTable');
+	}
+
+//]]>
+</script>
+
+</body>
+</html>
